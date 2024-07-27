@@ -1,13 +1,18 @@
 import express, { response } from "express"
-import Controller from "../controller/index"
-import userRoutes from "./users/usersRoutes"
+import userRoutes from "./users/usersRoutes.js"
+import bodyParser from "body-parser"
+
+
 const router: express.Router = express.Router()
-const controller = new Controller()
 
 router
     .route('/')
-    .get(controller.get)
+    .get(async (req: any, res: any) => {
+        res.send('Hello World')
+    })
+
 router.use(userRoutes)
+
 
 export default router
 

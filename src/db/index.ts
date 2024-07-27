@@ -1,7 +1,20 @@
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import Database from 'better-sqlite3';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pkg from 'pg';
+const { Client } = pkg;
 
-const sqlite = new Database("db.sqlite");
-const db = drizzle(sqlite);
+
+const client = new Client({
+    // connectionString: process.env.DATABASE_URL,
+    host: "localhost",
+    port: 5432,
+    user: "postgres",
+    password: "postgres",
+    database: "loreVaultDB",
+  });
+
+await client.connect()
+const db = drizzle(client);
+
 
 export default db

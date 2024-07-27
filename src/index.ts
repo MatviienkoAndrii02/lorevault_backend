@@ -1,4 +1,4 @@
-import { App } from "./core/index"
+import { App } from "./core/index.js"
 
 const app = new App()
 

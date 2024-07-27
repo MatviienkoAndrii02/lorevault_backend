@@ -1,6 +1,7 @@
 import express from "express"
 import { createServer, Server } from "http"
-import routes from "../routes/index"
+import routes from "../routes/index.js"
+import bodyParser from "body-parser"
 
 
 export class App {
@@ -20,6 +21,7 @@ export class App {
 
     private createApp(): express.Application {
         const app = express()
+        app.use(bodyParser.json())
         app.use('/v1', routes)
 
         return app

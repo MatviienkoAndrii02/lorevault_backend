@@ -1,10 +1,10 @@
 import { integer, pgTable, text, serial, } from 'drizzle-orm/pg-core';
 import { characters } from './characters';
-import { skills } from './skills';
+import { stats } from './stats';
 
-export const mapSkillCharacter = pgTable('mapSkillCharacter', {
+export const mapStatCharacter = pgTable('mapStatCharacter', {
     id: serial('id').primaryKey(),
     characterId: integer("characterId").references(() => characters.id),
-    skillId: integer("skillId").references(() => skills.id),
+    statId: integer("statId").references(() => stats.id),
   }, 
 );

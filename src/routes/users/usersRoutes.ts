@@ -1,24 +1,57 @@
 import express from "express"
-import Controller from "../../controller/index"
 import { Request, Response } from "express"
-import "../../db/connection"
-import db from "../../db"
-import { users } from "../../db/schema/users"
+import db from "../../db/index.js"
+import { users } from "../../db/schema/users.js"
+import { eq } from "drizzle-orm";
 
 const userRoutes: express.Router = express.Router()
-const controller = new Controller()
 
+// #region Get all users
 userRoutes
-    .route('/users')
+    .route('/')
     .get(async (req: Request, res: Response) => {
-        return res.send("Users")
+        const allUsers = await db.select().from(users)
+        return res.status(200).json(allUsers)
     })
 
+// #region Get user by id
 userRoutes
-    .route('/users')
-    .post(async (req: Request, res: Response) => {
-        const user = await db.insert(users).values(req.body)
+    .route('/id/:userId')
+    .get(async (req: Request, res: Response) => {
+        const userId: number = Number(req.params.userId)
+        const user = await db.select().from(users).where(eq(users.id, userId))
+        return res.status(200).json(user)
+    })
+
+// #region Create user
+userRoutes
+    .route('/')
+    .post(async (req: any, res: any) => {
+        const user = await db.insert(users).values(req.body).returning()
         return res.status(201).json(user)
     });
+
+// #region Delete user
+userRoutes.
+    route('/:userId')
+    .delete(async (req: Request, res: any) => {
+        const userId: number = Number(req.params.userId)
+        const user = await db.delete(users).where(eq(users.id, userId)).returning()
+        return res.status(200).json(user)
+    })
+
+// #region Update user
+// userRoutes.
+//     route('/:userId')
+//     .put(async (req: Request, res: any) => {
+//         const userId: number = Number(req.params.userId)
+//         const user = await db.delete(users).where(eq(users.id, userId)).returning()
+//         return res.status(200).json(user)
+//     })
+
+
+userRoutes.use('/users', userRoutes)
+
 export default userRoutes
+
 
