@@ -1,4 +1,3 @@
-import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pkg from 'pg';
 const { Client } = pkg;

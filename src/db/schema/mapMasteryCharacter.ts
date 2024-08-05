@@ -1,4 +1,4 @@
-import { integer, pgTable, text, serial, } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, } from 'drizzle-orm/pg-core';
 import { characters } from './characters';
 import { masteries } from './mastery';
 

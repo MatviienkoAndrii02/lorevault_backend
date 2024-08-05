@@ -1,6 +1,5 @@
-import express, { response } from "express"
+import express from "express"
 import userRoutes from "./users/usersRoutes.js"
-import bodyParser from "body-parser"
 
 
 const router: express.Router = express.Router()
@@ -8,7 +7,7 @@ const router: express.Router = express.Router()
 router
     .route('/')
     .get(async (req: any, res: any) => {
-        res.send('Hello World')
+        res.send('API v1')
     })
 
 router.use(userRoutes)
