@@ -45,6 +45,7 @@ userRoutes
 
         return res.status(200).json(user)
     })
+// #endregion
 
 // #region Update user
 userRoutes.
@@ -74,7 +75,7 @@ userRoutes.
 
         return res.status(200).json(user)
     })
-
+// #endregion
 
 // #region Delete user
 userRoutes.
@@ -95,7 +96,7 @@ userRoutes.
 
         return res.status(200).json(user)
     })
-
+// #endregion
 
 userRoutes.use('/users', userRoutes)
 
